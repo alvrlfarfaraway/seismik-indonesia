@@ -3,8 +3,8 @@
 ## Tujuan
 
 Menganalisis pola kegempaan di wilayah Indonesia menggunakan katalog gempa terbuka
-(misalnya USGS atau BMKG) untuk memahami distribusi ruang dan waktu gempa serta
-karakteristik statistiknya.
+dari USGS (FDSN event API) untuk memahami distribusi ruang dan waktu gempa serta
+karakteristik statistiknya. Proyek ini adalah analisis statistik, bukan prediksi gempa.
 
 ## Struktur Proyek
 
@@ -21,21 +21,22 @@ seismik-indonesia/
 
 ## Rencana Tiga Tahap
 
-### Tahap 1 — Pengambilan & Pembersihan Data
+### Tahap 1 - Pengambilan & Pembersihan Data
 - Mengunduh katalog gempa untuk wilayah Indonesia melalui API.
 - Membersihkan data: menghapus duplikat, menangani nilai hilang, menyeragamkan
   format waktu, magnitudo, dan kedalaman.
 - Menyimpan hasil ke `data/processed/`.
 
-### Tahap 2 — Analisis Eksploratif
+### Tahap 2 - Analisis Eksploratif
 - Statistik deskriptif magnitudo dan kedalaman.
 - Peta sebaran episenter dan tren jumlah gempa per waktu.
 - Perbandingan antarwilayah tektonik (mis. Sumatra, Jawa, Sulawesi, Maluku, Papua).
 
-### Tahap 3 — Analisis Statistik Seismisitas
-- Estimasi hubungan frekuensi–magnitudo (Gutenberg–Richter, nilai-b) dan magnitudo
-  kelengkapan katalog.
-- Analisis temporal dan klasterisasi (mis. gempa susulan).
+### Tahap 3 - Analisis Statistik Seismisitas
+- Estimasi nilai-b Gutenberg-Richter dengan maximum likelihood (Aki-Utsu).
+- Interval kepercayaan nilai-b dengan bootstrap.
+- Penentuan magnitudo kelengkapan (Mc) katalog.
+- Validasi Monte Carlo terhadap estimator.
 - Ringkasan temuan dan keterbatasan analisis.
 
 ## Memulai
