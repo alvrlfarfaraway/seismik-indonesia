@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alverrell Fann | Portofolio Statistika dan Sains Data</title>
+<meta name="description" content="Portofolio Alverrell Fann, mahasiswa Statistika dan Sains Data UNNES. Proyek unggulan: Analisis Seismisitas Indonesia.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root{
+  --bg:#0d1117; --bg2:#151b23; --card:#161d27; --line:#27313f;
+  --text:#e6edf3; --muted:#9aa7b5; --accent:#4cc2ff; --accent2:#ffb454; --warn:#f0883e;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent)}
+a:hover{color:#8bd8ff}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:1000;background:rgba(13,17,23,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:56px}
+.brand{font-weight:700;color:var(--text);text-decoration:none}
+nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none;font-size:.9rem}
+nav a:hover{color:var(--text)}
+section{padding:64px 0}
+section h2{font-size:1.7rem;margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 28px}
+.hero{padding:96px 0 72px;background:radial-gradient(900px 400px at 80% -10%,rgba(76,194,255,.14),transparent),var(--bg)}
+.hero .tag{color:var(--accent);font-weight:600;letter-spacing:.04em;font-size:.9rem}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.1;margin:10px 0 14px}
+.hero p{max-width:620px;color:var(--muted);font-size:1.1rem}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-block;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:600;border:1px solid var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);color:#06121b}
+.btn:hover{filter:brightness(1.15);color:inherit}
+.btn.primary:hover{color:#06121b}
+.grid{display:grid;gap:18px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.card h3{margin:0 0 6px;font-size:1.1rem}
+.card p{margin:0;color:var(--muted);font-size:.95rem}
+.pill{display:inline-block;font-size:.75rem;padding:2px 10px;border-radius:99px;background:#1d2733;color:var(--accent);margin-bottom:10px}
+.alt{background:var(--bg2);border-block:1px solid var(--line)}
+/* proyek unggulan */
+.stats{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin:24px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.stat .v{font-size:1.7rem;font-weight:700;color:var(--accent2)}
+.stat .l{color:var(--muted);font-size:.85rem}
+.notice{border-left:4px solid var(--warn);background:#2a1f16;padding:14px 16px;border-radius:8px;margin:0 0 24px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.panel h3{margin:0 0 4px;font-size:1.05rem}
+.panel .note{color:var(--muted);font-size:.85rem;margin:0 0 12px}
+#peta{height:460px;border-radius:10px;background:#0a0e13}
+.leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9)}
+.chartbox{position:relative;height:320px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--muted);font-weight:600}
+ul.lim{padding-left:20px;margin:8px 0 0}
+ul.lim li{margin-bottom:6px}
+.status{color:var(--muted);font-size:.9rem}
+.status.err{color:var(--warn)}
+.repo a.name{font-weight:700;text-decoration:none}
+.repo .meta{display:flex;justify-content:space-between;gap:8px;margin-top:12px;font-size:.8rem;color:var(--muted)}
+.leaflet-container{font:inherit}
+footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;text-align:center}
+@media (max-width:640px){
+  nav ul{gap:12px}
+  nav a{font-size:.8rem}
+  section{padding:48px 0}
+  #peta{height:340px}
+  .chartbox{height:280px}
+  .g2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#atas">Alverrell Fann</a>
+    <nav aria-label="Navigasi utama">
+      <ul>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#unggulan">Seismisitas</a></li>
+        <li><a href="#proyek">Proyek</a></li>
+        <li><a href="#keahlian">Keahlian</a></li>
+        <li><a href="#repo">Repositori</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="atas">
+<section class="hero">
+  <div class="wrap">
+    <div class="tag">Statistika dan Sains Data</div>
+    <h1>Alverrell Fann</h1>
+    <p>Mahasiswa Statistika dan Sains Data di Universitas Negeri Semarang (UNNES). Saya senang mengubah data mentah menjadi analisis yang bisa dipertanggungjawabkan dan visualisasi yang mudah dipahami.</p>
+    <div class="btns">
+      <a class="btn primary" href="#unggulan">Lihat proyek unggulan</a>
+      <a class="btn" href="https://github.com/alvrlfarfaraway" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section id="tentang" class="alt">
+  <div class="wrap">
+    <h2>Tentang saya</h2>
+    <p class="sub">Latar belakang dan minat.</p>
+    <div class="grid g2">
+      <div class="card">
+        <p>Saya mahasiswa program studi Statistika dan Sains Data UNNES. Minat saya ada pada inferensi statistika, analisis data eksploratif, dan pembuatan laporan yang dapat direproduksi. Saya terbiasa bekerja dengan Python dan R, menyimpan pekerjaan di Git, dan menekankan metode yang jelas serta batasan yang jujur pada setiap analisis.</p>
+      </div>
+      <div class="card">
+        <p>Di luar tugas kuliah, saya mengerjakan proyek pribadi dengan data terbuka, misalnya katalog gempa USGS. Tujuannya melatih alur kerja lengkap: mengunduh data, membersihkan, memodelkan, memvalidasi lewat simulasi, lalu mempublikasikan hasilnya.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="unggulan">
+  <div class="wrap">
+    <span class="pill">Proyek unggulan</span>
+    <h2>Analisis Seismisitas Indonesia</h2>
+    <p class="sub">Katalog gempa USGS untuk wilayah Indonesia, <span id="rentang">2015 sampai 2026</span>. Estimasi magnitudo kelengkapan (Mc) dan nilai-b Gutenberg-Richter, divalidasi dengan simulasi Monte Carlo.</p>
+
+    <div class="notice" role="note">
+      <strong>Catatan penting:</strong> ini adalah analisis statistik terhadap katalog historis, <strong>bukan prediksi gempa</strong>. Hasilnya tidak dapat dipakai untuk memperkirakan kapan atau di mana gempa berikutnya terjadi.
+    </div>
+
+    <div class="stats" id="stats">
+      <div class="stat"><div class="v">4,7</div><div class="l">Magnitudo kelengkapan (Mc)</div></div>
+      <div class="stat"><div class="v">1,19</div><div class="l">Nilai-b (Aki-Utsu)</div></div>
+      <div class="stat"><div class="v">[1,157; 1,225]</div><div class="l">Interval kepercayaan 95%</div></div>
+      <div class="stat"><div class="v">4.787</div><div class="l">Kejadian dengan M &ge; Mc</div></div>
+    </div>
+
+    <p id="status-data" class="status">Memuat data analisis...</p>
+
+    <div class="grid" style="gap:22px">
+      <div class="panel">
+        <h3>Peta kejadian M &ge; 5,0</h3>
+        <p class="note">Warna dan ukuran titik menurut magnitudo. Klik titik untuk detail.</p>
+        <div id="peta" role="img" aria-label="Peta titik kejadian gempa magnitudo 5,0 ke atas di Indonesia"></div>
+        <div class="legend" id="legend-peta"></div>
+      </div>
+
+      <div class="grid g2">
+        <div class="panel">
+          <h3>Frekuensi-magnitudo</h3>
+          <p class="note">Jumlah kumulatif kejadian (skala log) dan garis Gutenberg-Richter untuk M &ge; Mc.</p>
+          <div class="chartbox"><canvas id="grafik-fm" aria-label="Grafik frekuensi-magnitudo" role="img"></canvas></div>
+        </div>
+        <div class="panel">
+          <h3>Nilai-b per tahun</h3>
+          <p class="note">Estimasi tahunan dengan interval kepercayaan 95%. Garis putus-putus adalah nilai-b global.</p>
+          <div class="chartbox"><canvas id="grafik-b" aria-label="Grafik nilai-b per tahun" role="img"></canvas></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Validasi Monte Carlo</h3>
+        <p class="note">Data sintetis dengan b sebenarnya = 1,0. Cakupan idealnya mendekati 95%.</p>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>N</th><th>Ulangan</th><th>Rata-rata b</th><th>Bias</th><th>RMSE</th><th>Cakupan bootstrap</th><th>Cakupan Wald</th></tr></thead>
+            <tbody id="tabel-mc"><tr><td colspan="7" style="text-align:left">Memuat...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Keterbatasan</h3>
+        <ul class="lim">
+          <li>Katalog yang diunduh hanya memuat M &ge; 4,5, sehingga Mc tidak bisa diuji pada nilai yang lebih rendah dan estimasi Mc = 4,7 tidak dapat diperiksa terhadap ambang di bawahnya.</li>
+          <li>Magnitudo bersifat campuran (mb dan Mww) sehingga tidak homogen. Perbedaan skala dapat memengaruhi bentuk distribusi dan nilai-b.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="btns">
+      <a class="btn primary" href="https://github.com/alvrlfarfaraway/seismik-indonesia" target="_blank" rel="noopener">Lihat repositori di GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section id="proyek" class="alt">
+  <div class="wrap">
+    <h2>Proyek lain</h2>
+    <p class="sub">Tugas dan karya dari perkuliahan.</p>
+    <div class="grid g3">
+      <div class="card">
+        <span class="pill">Machine Learning</span>
+        <h3>Analisis Dataset Titanic</h3>
+        <p>Proyek mata kuliah Machine Learning: eksplorasi data penumpang Titanic dan pemodelan klasifikasi untuk memprediksi keselamatan penumpang.</p>
+      </div>
+      <div class="card">
+        <span class="pill">Makalah</span>
+        <h3>Makalah Halo Effect</h3>
+        <p>Makalah yang membahas Halo Effect, yaitu kecenderungan satu kesan umum memengaruhi penilaian atas atribut lain, beserta implikasinya.</p>
+      </div>
+      <div class="card">
+        <span class="pill">R Markdown</span>
+        <h3>Laporan R Markdown</h3>
+        <p>Laporan analisis yang reproduktif: kode, hasil, dan narasi berada dalam satu dokumen sehingga mudah diperiksa ulang.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="keahlian">
+  <div class="wrap">
+    <h2>Keahlian</h2>
+    <p class="sub">Alat dan kemampuan yang saya gunakan.</p>
+    <div class="grid g3">
+      <div class="card"><h3>Python</h3><p>Pengolahan data, analisis, dan skrip otomatisasi.</p></div>
+      <div class="card"><h3>R</h3><p>Analisis statistik dan laporan dengan R Markdown.</p></div>
+      <div class="card"><h3>Statistika</h3><p>Inferensi, estimasi, bootstrap, dan simulasi Monte Carlo.</p></div>
+      <div class="card"><h3>Git dan GitHub</h3><p>Kontrol versi dan dokumentasi proyek.</p></div>
+      <div class="card"><h3>Visualisasi</h3><p>Grafik dan peta yang komunikatif dan jujur terhadap data.</p></div>
+      <div class="card"><h3>Cloud Azure</h3><p>Pemahaman dasar layanan cloud Microsoft Azure.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="repo" class="alt">
+  <div class="wrap">
+    <h2>Repositori terbaru</h2>
+    <p class="sub">Diambil langsung dari GitHub.</p>
+    <p id="status-repo" class="status">Memuat repositori...</p>
+    <div id="daftar-repo" class="grid g3"></div>
+  </div>
+</section>
+
+<section id="kontak">
+  <div class="wrap">
+    <h2>Kontak</h2>
+    <p class="sub">Silakan lihat karya saya atau hubungi lewat GitHub.</p>
+    <a class="btn primary" href="https://github.com/alvrlfarfaraway" target="_blank" rel="noopener">github.com/alvrlfarfaraway</a>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">&copy; 2026 Alverrell Fann. Data gempa: USGS.</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var fmt = function (x, d) {
+    return Number(x).toLocaleString('id-ID', { minimumFractionDigits: d, maximumFractionDigits: d });
+  };
+  var id = function (x) { return Number(x).toLocaleString('id-ID'); };
+  var el = function (id) { return document.getElementById(id); };
+
+  /* ---------- Warna magnitudo ---------- */
+  var KELAS = [
+    { min: 5.0, max: 5.5, warna: '#4cc2ff', label: '5,0 - 5,4' },
+    { min: 5.5, max: 6.0, warna: '#ffd166', label: '5,5 - 5,9' },
+    { min: 6.0, max: 7.0, warna: '#f78c40', label: '6,0 - 6,9' },
+    { min: 7.0, max: 99,  warna: '#ff4d4d', label: '7,0 ke atas' }
+  ];
+  function kelas(m) {
+    for (var i = 0; i < KELAS.length; i++) if (m >= KELAS[i].min && m < KELAS[i].max) return KELAS[i];
+    return KELAS[0];
+  }
+
+  /* ---------- Peta ---------- */
+  function buatPeta(titik) {
+    if (!window.L) { el('peta').textContent = 'Pustaka peta gagal dimuat.'; return; }
+    var peta = L.map('peta', { preferCanvas: true, worldCopyJump: true }).setView([-2.5, 118], 4);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+      maxZoom: 10
+    }).addTo(peta);
+
+    if (titik.length) {
+      peta.fitBounds(titik.map(function (t) { return [t.lat, t.lon]; }), { padding: [20, 20] });
+    }
+
+    titik.forEach(function (t) {
+      var k = kelas(t.mag);
+      var r = 2 + (t.mag - 5) * 3.2;
+      var m = L.circleMarker([t.lat, t.lon], {
+        radius: r, color: k.warna, weight: 1, fillColor: k.warna, fillOpacity: 0.55
+      }).addTo(peta);
+      var tgl = String(t.time || '').slice(0, 10);
+      var isi = document.createElement('div');
+      var b = document.createElement('strong');
+      b.textContent = 'M ' + fmt(t.mag, 1);
+      isi.appendChild(b);
+      isi.appendChild(document.createElement('br'));
+      isi.appendChild(document.createTextNode(
+        (t.place || 'Lokasi tidak diketahui') + ' | ' + tgl + ' | kedalaman ' + fmt(t.depth, 0) + ' km'));
+      m.bindPopup(isi);
+    });
+
+    el('legend-peta').innerHTML = KELAS.map(function (k) {
+      return '<span><i style="background:' + k.warna + '"></i>M ' + k.label + '</span>';
+    }).join('') + '<span>' + titik.length.toLocaleString('id-ID') + ' kejadian</span>';
+  }
+
+  /* ---------- Grafik ---------- */
+  function gayaDasar() {
+    Chart.defaults.color = '#9aa7b5';
+    Chart.defaults.borderColor = '#27313f';
+    Chart.defaults.font.family = 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
+  }
+
+  function grafikFM(d) {
+    var mc = d.mc.mc, a = d.a_value, b = d.b_global.b;
+    var pts = d.frekuensi_magnitudo.filter(function (r) { return r.n_kumulatif > 0; })
+      .map(function (r) { return { x: r.m, y: r.n_kumulatif }; });
+    var mMaks = d.frekuensi_magnitudo[d.frekuensi_magnitudo.length - 1].m;
+    var garis = [mc, mMaks].map(function (m) { return { x: m, y: Math.pow(10, a - b * m) }; });
+    new Chart(el('grafik-fm'), {
+      type: 'scatter',
+      data: { datasets: [
+        { label: 'Kumulatif N(M ≥ m)', data: pts, backgroundColor: '#4cc2ff', pointRadius: 3 },
+        { label: 'Garis Gutenberg-Richter (b = ' + fmt(b, 2) + ')', data: garis, type: 'line',
+          borderColor: '#ffb454', borderWidth: 2, pointRadius: 0 }
+      ] },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+          x: { title: { display: true, text: 'Magnitudo' }, min: 4.4,
+               ticks: { callback: function (v) { return fmt(v, 1); } } },
+          y: { type: 'logarithmic', title: { display: true, text: 'Jumlah kejadian (log)' },
+               afterBuildTicks: function (ax) {
+                 var t = [], mx = ax.max;
+                 for (var v = 1; v <= mx; v *= 10) t.push({ value: v });
+                 ax.ticks = t;
+               },
+               ticks: { callback: function (v) { return id(v); } } }
+        },
+        plugins: { tooltip: { callbacks: { label: function (c) {
+          return 'M ≥ ' + fmt(c.parsed.x, 1) + ': ' + Math.round(c.parsed.y).toLocaleString('id-ID');
+        } } } }
+      }
+    });
+  }
+
+  function grafikB(d) {
+    var rows = d.b_per_tahun;
+    var tahun = rows.map(function (r) { return r.tahun; });
+    new Chart(el('grafik-b'), {
+      type: 'line',
+      data: { labels: tahun, datasets: [
+        { label: 'Batas bawah 95%', data: rows.map(function (r) { return r.ci_low; }),
+          borderColor: 'rgba(76,194,255,0.0)', backgroundColor: 'rgba(76,194,255,0.18)', pointRadius: 0, fill: false },
+        { label: 'Interval 95%', data: rows.map(function (r) { return r.ci_high; }),
+          borderColor: 'rgba(76,194,255,0.0)', backgroundColor: 'rgba(76,194,255,0.18)', pointRadius: 0, fill: '-1' },
+        { label: 'Nilai-b', data: rows.map(function (r) { return r.b; }),
+          borderColor: '#4cc2ff', backgroundColor: '#4cc2ff', borderWidth: 2, pointRadius: 4, tension: 0.2 },
+        { label: 'b global (' + fmt(d.b_global.b, 2) + ')', data: tahun.map(function () { return d.b_global.b; }),
+          borderColor: '#ffb454', borderDash: [6, 4], borderWidth: 2, pointRadius: 0 }
+      ] },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        layout: { padding: { right: 24 } },
+        scales: {
+          x: { title: { display: true, text: 'Tahun' }, offset: true,
+               ticks: { autoSkip: false, callback: function (v) { return String(this.getLabelForValue(v)); } } },
+          y: { title: { display: true, text: 'Nilai-b' },
+               ticks: { callback: function (v) { return fmt(v, 1); } } }
+        },
+        plugins: {
+          legend: { labels: { filter: function (it) { return it.text !== 'Batas bawah 95%'; } } },
+          tooltip: { callbacks: { label: function (c) {
+            var r = rows[c.dataIndex];
+            if (c.datasetIndex === 2) {
+              return 'b = ' + fmt(r.b, 3) + ' [' + fmt(r.ci_low, 3) + '; ' + fmt(r.ci_high, 3) + '], n = ' + r.n;
+            }
+            return c.dataset.label + ': ' + fmt(c.parsed.y, 3);
+          } } }
+        }
+      }
+    });
+  }
+
+  function tabelMC(rows) {
+    var pct = function (x) { return fmt(x * 100, 1) + '%'; };
+    el('tabel-mc').innerHTML = rows.map(function (r) {
+      return '<tr><td>' + r.N.toLocaleString('id-ID') + '</td><td>' + r.ulangan.toLocaleString('id-ID') +
+        '</td><td>' + fmt(r.rata_b, 3) + '</td><td>' + fmt(r.bias, 4) + '</td><td>' + fmt(r.rmse, 4) +
+        '</td><td>' + pct(r.cakupan_bootstrap) + '</td><td>' + pct(r.cakupan_wald) + '</td></tr>';
+    }).join('');
+  }
+
+  /* ---------- Muat results.json ---------- */
+  fetch('data/results.json')
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (d) {
+      el('status-data').style.display = 'none';
+      if (d.rentang_waktu && d.rentang_waktu.length === 2) {
+        el('rentang').textContent = d.rentang_waktu[0].slice(0, 4) + ' sampai ' + d.rentang_waktu[1].slice(0, 4);
+      }
+      if (window.Chart) { gayaDasar(); grafikFM(d); grafikB(d); }
+      tabelMC(d.monte_carlo);
+      buatPeta(d.lokasi_m5);
+    })
+    .catch(function (e) {
+      var s = el('status-data');
+      s.className = 'status err';
+      s.textContent = 'Data analisis belum bisa dimuat (' + e.message + '). Jika halaman dibuka langsung dari file, jalankan lewat server lokal, misalnya: python -m http.server di folder web.';
+      el('tabel-mc').innerHTML = '<tr><td colspan="7" style="text-align:left">Data tidak tersedia.</td></tr>';
+    });
+
+  /* ---------- Repositori GitHub ---------- */
+  function kartuRepo(r) {
+    var c = document.createElement('div');
+    c.className = 'card repo';
+    var a = document.createElement('a');
+    a.className = 'name'; a.href = r.html_url; a.target = '_blank'; a.rel = 'noopener';
+    a.textContent = r.name;
+    var p = document.createElement('p');
+    p.style.marginTop = '6px';
+    p.textContent = r.description || 'Belum ada deskripsi.';
+    var meta = document.createElement('div');
+    meta.className = 'meta';
+    var bhs = document.createElement('span');
+    bhs.textContent = r.language || 'Bahasa tidak ditentukan';
+    var tgl = document.createElement('span');
+    tgl.textContent = 'Diperbarui ' + (r.updated_at || '').slice(0, 10);
+    meta.appendChild(bhs); meta.appendChild(tgl);
+    c.appendChild(a); c.appendChild(p); c.appendChild(meta);
+    return c;
+  }
+
+  function pesanRepo(teks, galat) {
+    var s = el('status-repo');
+    s.style.display = '';
+    s.className = 'status' + (galat ? ' err' : '');
+    s.textContent = teks;
+  }
+
+  fetch('https://api.github.com/users/alvrlfarfaraway/repos?sort=updated&per_page=6')
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (list) {
+      if (!Array.isArray(list) || list.length === 0) {
+        pesanRepo('Belum ada repositori publik yang bisa ditampilkan. Kunjungi profil GitHub saya untuk melihat karya terbaru.');
+        return;
+      }
+      el('status-repo').style.display = 'none';
+      var box = el('daftar-repo');
+      list.forEach(function (r) { box.appendChild(kartuRepo(r)); });
+    })
+    .catch(function () {
+      pesanRepo('Daftar repositori sedang tidak dapat dimuat (mungkin batas permintaan GitHub tercapai). Silakan kunjungi github.com/alvrlfarfaraway secara langsung.', true);
+    });
+})();
+</script>
+</body>
+</html>
