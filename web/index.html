@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Alverrell Fann | Portofolio Statistika dan Sains Data</title>
-<meta name="description" content="Portofolio Alverrell Fann, mahasiswa Statistika dan Sains Data UNNES. Proyek unggulan: Analisis Seismisitas Indonesia.">
+<title>Alverrell Gustivierda Zidna Fann | Portofolio Statistika dan Sains Data</title>
+<meta name="description" content="Portofolio Alverrell Gustivierda Zidna Fann, mahasiswa Statistika dan Sains Data UNNES. Proyek unggulan: Analisis Seismisitas Indonesia.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
 :root{
@@ -43,6 +43,10 @@ section h2{font-size:1.7rem;margin:0 0 8px}
 .card h3{margin:0 0 6px;font-size:1.1rem}
 .card p{margin:0;color:var(--muted);font-size:.95rem}
 .pill{display:inline-block;font-size:.75rem;padding:2px 10px;border-radius:99px;background:#1d2733;color:var(--accent);margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0;padding:0;list-style:none}
+.chips li{font-size:.8rem;padding:3px 10px;border-radius:99px;border:1px solid var(--line);background:#1d2733}
+.chips li small{color:var(--muted);margin-left:4px}
+.badge{display:inline-block;font-size:.7rem;margin-left:8px;padding:1px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted);vertical-align:middle;font-weight:400}
 .alt{background:var(--bg2);border-block:1px solid var(--line)}
 /* proyek unggulan */
 .stats{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin:24px 0}
@@ -85,7 +89,7 @@ footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#atas">Alverrell Fann</a>
+    <a class="brand" href="#atas">Alverrell</a>
     <nav aria-label="Navigasi utama">
       <ul>
         <li><a href="#tentang">Tentang</a></li>
@@ -103,7 +107,7 @@ footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 <section class="hero">
   <div class="wrap">
     <div class="tag">Statistika dan Sains Data</div>
-    <h1>Alverrell Fann</h1>
+    <h1>Alverrell Gustivierda Zidna Fann</h1>
     <p>Mahasiswa Statistika dan Sains Data di Universitas Negeri Semarang (UNNES). Saya senang mengubah data mentah menjadi analisis yang bisa dipertanggungjawabkan dan visualisasi yang mudah dipahami.</p>
     <div class="btns">
       <a class="btn primary" href="#unggulan">Lihat proyek unggulan</a>
@@ -196,17 +200,11 @@ footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 <section id="proyek" class="alt">
   <div class="wrap">
     <h2>Proyek lain</h2>
-    <p class="sub">Tugas dan karya dari perkuliahan.</p>
     <div class="grid g3">
       <div class="card">
         <span class="pill">Machine Learning</span>
         <h3>Analisis Dataset Titanic</h3>
         <p>Proyek mata kuliah Machine Learning: eksplorasi data penumpang Titanic dan pemodelan klasifikasi untuk memprediksi keselamatan penumpang.</p>
-      </div>
-      <div class="card">
-        <span class="pill">Makalah</span>
-        <h3>Makalah Halo Effect</h3>
-        <p>Makalah yang membahas Halo Effect, yaitu kecenderungan satu kesan umum memengaruhi penilaian atas atribut lain, beserta implikasinya.</p>
       </div>
       <div class="card">
         <span class="pill">R Markdown</span>
@@ -221,13 +219,36 @@ footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-s
   <div class="wrap">
     <h2>Keahlian</h2>
     <p class="sub">Alat dan kemampuan yang saya gunakan.</p>
-    <div class="grid g3">
-      <div class="card"><h3>Python</h3><p>Pengolahan data, analisis, dan skrip otomatisasi.</p></div>
-      <div class="card"><h3>R</h3><p>Analisis statistik dan laporan dengan R Markdown.</p></div>
-      <div class="card"><h3>Statistika</h3><p>Inferensi, estimasi, bootstrap, dan simulasi Monte Carlo.</p></div>
-      <div class="card"><h3>Git dan GitHub</h3><p>Kontrol versi dan dokumentasi proyek.</p></div>
-      <div class="card"><h3>Visualisasi</h3><p>Grafik dan peta yang komunikatif dan jujur terhadap data.</p></div>
-      <div class="card"><h3>Cloud Azure</h3><p>Pemahaman dasar layanan cloud Microsoft Azure.</p></div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Bahasa Pemrograman</h3>
+        <ul class="chips">
+          <li>Python</li><li>R</li>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Statistika dan Machine Learning</h3>
+        <ul class="chips">
+          <li>XGBoost</li><li>LightGBM</li><li>Random Forest</li><li>SHAP</li>
+          <li>scikit-learn</li><li>pandas</li><li>NumPy</li>
+          <li>Inferensi statistik</li><li>Estimasi</li><li>Bootstrap</li><li>Simulasi Monte Carlo</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>AI Engineering</h3>
+        <ul class="chips">
+          <li>LLM API</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>DevOps</h3>
+        <ul class="chips">
+          <li>Azure <small>hosting cloud</small></li><li>Git</li><li>GitHub</li><li>Command line</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -235,7 +256,6 @@ footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 <section id="repo" class="alt">
   <div class="wrap">
     <h2>Repositori terbaru</h2>
-    <p class="sub">Diambil langsung dari GitHub.</p>
     <p id="status-repo" class="status">Memuat repositori...</p>
     <div id="daftar-repo" class="grid g3"></div>
   </div>
@@ -250,7 +270,7 @@ footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 </section>
 </main>
 
-<footer><div class="wrap">&copy; 2026 Alverrell Fann. Data gempa: USGS.</div></footer>
+<footer><div class="wrap">&copy; 2026 Alverrell Gustivierda Zidna Fann. Data gempa: USGS.</div></footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -445,9 +465,19 @@ footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-s
     s.textContent = teks;
   }
 
-  fetch('https://api.github.com/users/alvrlfarfaraway/repos?sort=updated&per_page=6')
+  // Repo yang tidak ingin ditampilkan (cocok persis dengan nama, tanpa membedakan huruf besar/kecil).
+  var REPO_DISEMBUNYIKAN = ['UTS-Prediksi-modern'];
+  var MAKS_REPO = 6;
+
+  // Ambil lebih banyak dari MAKS_REPO agar daftar tetap terisi setelah penyaringan.
+  fetch('https://api.github.com/users/alvrlfarfaraway/repos?sort=updated&per_page=30')
     .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(function (list) {
+      if (Array.isArray(list)) {
+        var tersembunyi = REPO_DISEMBUNYIKAN.map(function (n) { return n.toLowerCase(); });
+        list = list.filter(function (r) { return tersembunyi.indexOf(r.name.toLowerCase()) === -1; })
+                   .slice(0, MAKS_REPO);
+      }
       if (!Array.isArray(list) || list.length === 0) {
         pesanRepo('Belum ada repositori publik yang bisa ditampilkan. Kunjungi profil GitHub saya untuk melihat karya terbaru.');
         return;
